@@ -1,0 +1,28 @@
+<div *ngIf="gifs.length > 0">
+  <ng-masonry-grid
+    [masonryOptions]="{
+      transitionDuration: '0.8s',
+      horizontalOrder: false,
+      columnWidth: 150,
+      gutter: 10}"
+    [useAnimation]="true"
+    [useImagesLoaded]="true"
+    [scrollAnimationOptions]="{ animationEffect: 'effect-4', minDuration : 0.4, maxDuration : 0.7 }">
+    <ng-masonry-grid-item class="item" *ngFor="let gif of gifs | pagination:pageSize:page ">
+      <app-gif [gif]="gif"></app-gif>
+    </ng-masonry-grid-item>
+  </ng-masonry-grid>
+
+  <div class="pagination">
+    <ngb-pagination
+      [collectionSize]="gifs.length"
+      [pageSize]="pageSize"
+      [(page)]="page"
+      (pageChange) = "pageChange($event)">
+    </ngb-pagination>
+  </div>
+</div>
+
+<div class="not-found" *ngIf="gifs.length === 0">
+  Sorry, nothing found ...
+</div>

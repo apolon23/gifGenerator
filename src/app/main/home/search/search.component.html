@@ -1,0 +1,20 @@
+<form [formGroup]="form" class="search-form" (ngSubmit)="onSubmit()">
+    <input
+      type="text"
+      class="form-control underlined"
+      id="search"
+      placeholder="Search a GIF"
+      formControlName="search"
+    >
+    <button
+      class="search-btn"
+      type="submit"
+      [disabled]="form.status == 'INVALID'"
+    >
+      <i class="fa fa-search"></i>
+    </button>
+  </form>
+  <div *ngIf="gifs" class="gifsContainer">
+    <app-result [gifs]="gifs" ></app-result>
+  </div>
+

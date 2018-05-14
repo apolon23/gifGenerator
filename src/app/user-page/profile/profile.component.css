@@ -1,0 +1,22 @@
+.has-error .form-control.underlined {
+  box-shadow:none;
+  border-color:#f44;
+}
+.form-group.has-error .form-help-text {
+  color:#fb494d;
+  font-size:13px;
+}
+.form-group.has-error .form-control {
+  border-color:#fb494d;
+}
+.new-pass .btn {
+  margin-bottom: 3px;
+}
+.new-pass {
+  padding: 20px 0 20px 40px;
+}
+@media (max-width: 850px) {
+  .new-pass {
+    padding-left: 0;
+  }
+}

@@ -1,0 +1,34 @@
+<div class="reset-wrap">
+  <h3 class="h3">Reset your password</h3>
+  <form #emailForm=ngForm [formGroup]="form" (ngSubmit)="submitReset(Email)">
+    <div
+      class="form-group"
+      [ngClass]="{'has-error': form.get('Email').invalid && form.get('Email').touched}"
+    >
+      <i class="fa fa-envelope-o" aria-hidden="true"></i>
+      <input
+        type="text"
+        class="form-control underlined"
+        ngModel
+        #Email
+        id="Email"
+        placeholder="Enter your email"
+        formControlName="Email"
+      >
+      <span
+        class="form-help-text"
+        *ngIf="form.get('Email').invalid && form.get('Email').touched"
+      >
+          <span *ngIf="form.get('Email') ['errors'] ['required']">Email can not be empty.</span>
+          <span *ngIf="form.get('Email') ['errors'] ['email'] || form.get('Email') ['errors'] ['pattern']">Enter corrected email</span>
+        </span>
+    </div>
+    <button
+      type="submit"
+      class="btn  btn-primary"
+      [disabled]="form.invalid"
+    >request password recovery</button>
+  </form>
+  <a [routerLink]="['/']" class="back-link">Home page</a>
+</div>
+

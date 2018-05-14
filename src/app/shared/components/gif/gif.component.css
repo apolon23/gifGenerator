@@ -1,0 +1,19 @@
+.gif-container{
+  background-position: center;
+  background-repeat:no-repeat;
+  cursor: pointer;
+}
+.modal-body{
+  background-image: url(../../../../assets/images/loader.gif);
+  background-position: center;
+  background-repeat:no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/deep/ .modal-content{
+  width: fit-content;
+}
+/deep/ .modal-title{
+  width: max-content;
+}

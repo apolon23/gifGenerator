@@ -1,0 +1,57 @@
+/* You can add global styles to this file, and also import other style files */
+@font-face {
+  font-family: 'Open Sans';
+  src: url('./assets/fonts/OpenSans/OpenSansLight/OpenSansLight.eot');
+  src: url('./assets/fonts/OpenSans/OpenSansLight/OpenSansLight.woff') format('woff'), url('./assets/fonts/OpenSans/OpenSansLight/OpenSansLight.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  src: url('./assets/fonts/OpenSans/OpenSansRegular/OpenSansRegular.eot');
+  src: url('./assets/fonts/OpenSans/OpenSansRegular/OpenSansRegular.woff') format('woff'), url('./assets/fonts/OpenSans/OpenSansRegular/OpenSansRegular.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  src: url('./assets/fonts/OpenSans/OpenSansSemiBold/OpenSansSemiBold.eot');
+  src: url('./assets/fonts/OpenSans/OpenSansSemiBold/OpenSansSemiBold.woff') format('woff'), url('./assets/fonts/OpenSans/OpenSansSemiBold/OpenSansSemiBold.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 600;
+}
+@font-face {
+  font-family: 'Open Sans';
+  src: url('./assets/fonts/OpenSans/OpenSansBold/OpenSansBold.eot');
+  src: url('./assets/fonts/OpenSans/OpenSansBold/OpenSansBold.woff') format('woff'), url('./assets/fonts/OpenSans/OpenSansBold/OpenSansBold.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 700;
+}
+@font-face {
+  font-family: 'Open Sans';
+  src: url('./assets/fonts/OpenSans/OpenSansExtraBold/OpenSansExtraBold.eot');
+  src: url('./assets/fonts/OpenSans/OpenSansExtraBold/OpenSansExtraBold.woff') format('woff'), url('./assets/fonts/OpenSans/OpenSansExtraBold/OpenSansExtraBold.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 900;
+}
+@font-face {
+  font-family: 'Open Sans';
+  src: url('./assets/fonts/OpenSans/OpenSansItalic/OpenSansItalic.eot');
+  src: url('./assets/fonts/OpenSans/OpenSansItalic/OpenSansItalic.woff') format('woff'), url('./assets/fonts/OpenSans/OpenSansItalic/OpenSansItalic.ttf') format('truetype');
+  font-style: italic;
+  font-weight: 400;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  line-height: 1.5;
+  font-size: 16px;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+}
+ul li {
+  list-style-type: none;
+}

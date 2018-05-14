@@ -1,0 +1,126 @@
+.admin-header {
+  height: 70px;
+  background-color: #fff;
+  color: #06384f;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding:0 20px;
+  z-index: 100;
+  position: absolute;
+  width: 100%;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.05);
+}
+.logo {
+  color: #000;
+  font-size: 20px;
+  margin-left: 20px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.bar {
+  display: block;
+  height: 5px;
+  width: 40px;
+  background: #111;
+  margin: 7px auto;
+}
+.con {
+  display: inline-block;
+  cursor: pointer;
+  width: auto;
+  margin: 0 auto;
+  -webkit-transition: all .7s ease;
+  -moz-transition: all .7s ease;
+  -ms-transition: all .7s ease;
+  -o-transition: all .7s ease;
+  transition: all .7s ease;
+  background-color: transparent;
+  outline: none;
+  border: none;
+}
+.con:hover .bar {
+  background-color:#398bf7;
+}
+.middle {
+  margin: 0 auto;
+}
+.bar {
+  -webkit-transition: all .7s ease;
+  -moz-transition: all .7s ease;
+  -ms-transition: all .7s ease;
+  -o-transition: all .7s ease;
+  transition: all .7s ease;
+}
+.con.cat .top {
+  -webkit-transform: translateY(11px) rotateZ(45deg);
+  -moz-transform: translateY(11px) rotateZ(45deg);
+  -ms-transform: translateY(11px) rotateZ(45deg);
+  -o-transform: translateY(11px) rotateZ(45deg);
+  transform: translateY(11px) rotateZ(45deg);
+}
+.con.cat .bottom {
+  -webkit-transform: translateY(-13px) rotateZ(-45deg);
+  -moz-transform: translateY(-13px) rotateZ(-45deg);
+  -ms-transform: translateY(-13px) rotateZ(-45deg);
+  -o-transform: translateY(-13px) rotateZ(-45deg);
+  transform: translateY(-13px) rotateZ(-45deg);
+}
+.con.cat .middle {
+  width: 0;
+}
+#admin-nav {
+  position: absolute;
+  background: #06384f;
+  width: 100%;
+  left: 0;
+  top: -100%;
+  z-index: 50;
+  transition-timing: 1s;
+  box-shadow: 0 0 10px #000;
+  transition: all .5s ease;
+
+}
+#admin-nav.down {
+  top: 74px;
+}
+#admin-nav li.active > a {
+  color: #398bf7;
+}
+.down li a {
+  color: #687384;
+  text-decoration: none;
+  padding: 8px 35px 8px 25px;
+  display: block;
+  font-size: 18px;
+}
+.down ul {
+  padding: 0;
+}
+.down li a:hover {
+  color: #398bf7;
+}
+.header-avatar {
+  margin-left: 8px;
+}
+.my-avatar /deep/ .avatar-container {
+  display: inline-block!important;
+}
+
+@media(min-width: 769px) {
+  .open-slide {
+    display: none;
+  }
+  .down {
+    display: none;
+  }
+}
+@media(max-width: 580px) {
+  .logo {
+    font-size: 15px;
+  }
+  .admin-header {
+    height: 80px;
+  }
+}

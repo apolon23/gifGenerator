@@ -1,0 +1,16 @@
+.page-wrapper {
+  margin-left: 240px;
+  background-color: #f4f6f9;
+  height: 100vh;
+  position: relative;
+  overflow: auto;
+  padding-top: 70px;
+}
+.page-wrapper .container-fluid {
+  padding: 25px;
+}
+@media (max-width: 769px) {
+  .page-wrapper {
+    margin-left: 0;
+  }
+}

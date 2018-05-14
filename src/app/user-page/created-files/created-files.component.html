@@ -1,0 +1,11 @@
+<ng-container *ngIf="!isImageLoading; else noImageFound">
+  <div class="flex-user">
+    <div *ngFor="let image of imageToShow;" class="user-images">
+      <div class="img-wrap"><img [src]="image.url"/></div>
+      <button class="btn btn-danger" (click)="deleteImage(image._id)">Delete Image</button>
+    </div>
+  </div>
+</ng-container>
+<ng-template #noImageFound>
+  <img src="./../../../assets/images/not_found.png" alt="Fallbackimage">
+</ng-template>

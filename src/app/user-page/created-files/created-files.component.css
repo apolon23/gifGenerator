@@ -1,0 +1,34 @@
+.flex-user {
+  display: flex;
+  flex-wrap: wrap;
+}
+.user-images .btn {
+  font-size: 13px;
+  padding: 0 5px;
+  margin-top: 5px;
+}
+.user-images {
+  width: 300px;
+  position: relative;
+  margin-bottom: 15px;
+  margin-left: 10px;
+}
+.img-wrap {
+  position: relative;
+  height: 0;
+  padding-top: 60%;
+  overflow: hidden;
+}
+.img-wrap img {
+   width: 100%;
+   height: 100%;
+   border: 0;
+   position: absolute;
+   top: 0;
+   left: 0;
+ }
+@media (max-width: 910px) {
+  .flex-user {
+    justify-content: center;
+  }
+}

@@ -1,0 +1,64 @@
+﻿<p class="text-center">Sign in for work</p>
+<button (click)="signInWithFB()" class="btn btn-md btn-facebook btn-block">
+  Continue with Facebook
+</button>
+<button class="btn btn-md btn-danger btn-block" (click)="signInWithGoogle()">Google Sign In</button>
+<form [formGroup]="form" (ngSubmit)="login()">
+  <div
+    class="form-group"
+    [ngClass]="{'has-error': form.get('email').invalid && form.get('email').touched}"
+  >
+    <label for="email">Email</label>
+    <input
+      type="text"
+      class="form-control underlined"
+      id="email"
+      placeholder="Enter your email"
+      formControlName="email"
+    >
+    <span
+      class="form-help-text"
+      *ngIf="form.get('email').invalid && form.get('email').touched"
+    >
+          <span *ngIf="form.get('email') ['errors'] ['required']">Email can not be empty.</span>
+          <span *ngIf="form.get('email') ['errors'] ['email']">Enter corrected email</span>
+        </span>
+  </div>
+  <div class="form-group" [ngClass]="{'has-error': form.get('password').invalid && form.get('password').touched}">
+    <label for="password">Password</label>
+    <show-hide-password  icon="fontawesome">
+      <input
+        type="password"
+        class="form-control underlined"
+        id="password"
+        placeholder="Password"
+        formControlName="password"
+      >
+    </show-hide-password>
+    <span
+      class="form-help-text"
+      *ngIf="form.get('password').invalid && form.get('password').touched"
+    >
+          <span *ngIf="form.get('password') ['errors'] ['required']">Password can not be empty.</span>
+          <span *ngIf="form.get('password') ['errors'] ['minlength'] &&  form.get('password') ['errors'] ['minlength'] ['requiredLength']">
+          Password must be more than {{ form.get('password') ['errors'] ['minlength'] ['requiredLength'] }} characters.
+          You have now entered  {{ form.get('password') ['errors'] ['minlength'] ['actualLength'] }} </span>
+        </span>
+  </div>
+  <div class="form-group">
+    <button
+      type="submit"
+      class="btn btn-block btn-primary"
+      [disabled]="form.invalid"
+    >Log in</button>
+  </div>
+  <div class="form-group">
+    <p class="text-muted text-center">
+      Don't Have An Account?<a [routerLink]="'/auth/registration'"> Sign up now!</a>
+    </p>
+    <p class="text-center">
+     <a [routerLink]="['/']">Back to home page</a>
+    </p>
+  </div>
+</form>
+

@@ -1,0 +1,26 @@
+.text-center {
+  font-weight: 600;
+}
+.text-muted a {
+  color: #007bff;
+  text-decoration: none;
+}
+.text-muted a:hover {
+  color: #0056b3;
+}
+.has-error .form-control.underlined {
+  box-shadow:none;
+  border-color:#f44;
+}
+.form-group.has-error .form-help-text {
+  color:#fb494d;
+  font-size:13px;
+}
+.form-group.has-error .form-control {
+  border-color:#fb494d;
+}
+.btn-facebook {
+  background-color: #4267B2;
+  color: #ffffff;
+}
+

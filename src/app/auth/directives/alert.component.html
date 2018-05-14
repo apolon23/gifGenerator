@@ -1,0 +1,5 @@
+﻿<div *ngIf="messageReg" [ngClass]="{ 'alert': messageReg, 'alert-success': messageReg.type === 'successReg', 'alert-danger': messageReg.type === 'errorReg' }">{{messageReg.text}}</div>
+<div *ngIf="message" [ngClass]="{ 'alert': message, 'alert-danger': message.type === 'error' }" style="text-align: center"><span style="display: block; font-size: 15px;">Incorrect email or password.</span>
+  <a [routerLink]="['/auth/reset']" style="text-decoration: underline;  font-size: 13px;">Forgot password?</a></div>
+
+

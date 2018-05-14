@@ -1,0 +1,48 @@
+.page-title {
+  margin-bottom: 30px;
+}
+.user-list li {
+  background-color: #fff;
+  margin-bottom: 8px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #687384;
+}
+.update-user {
+  margin-top: 10px;
+  padding-left: 40px;
+}
+.update-user label {
+  display: block;
+}
+.flex-list {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.new-user {
+  padding: 20px 0 20px 40px;
+}
+.new-user .btn {
+  margin-bottom: 3px;
+}
+.has-error .form-control.underlined {
+  box-shadow:none;
+  border-color:#f44;
+}
+.form-group.has-error .form-help-text {
+  color:#fb494d;
+  font-size:13px;
+}
+.form-group.has-error .form-control {
+  border-color:#fb494d;
+}
+@media (max-width: 850px) {
+  .user-list ul {
+    padding-left: 0;
+  }
+  .new-user {
+    padding-left: 0;
+  }
+}

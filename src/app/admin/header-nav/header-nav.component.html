@@ -1,0 +1,18 @@
+<header class="admin-header">
+  <span class="open-slide">
+    <button  class="con" id="burg" (click)="openAdminMenu()">
+      <div class="bar top"></div>
+      <div class="bar middle"></div>
+      <div class="bar bottom"></div>
+    </button>
+  </span>
+  <div class="logo"><a [routerLink]="['/admin']">Admin Panel</a></div>
+</header>
+<nav id="admin-nav">
+  <ul>
+    <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['/admin']">Manage Users</a></li>
+    <li routerLinkActive="active"><a [routerLink]="['/admin/manage-page']">Manage Home Page</a></li>
+    <li routerLinkActive="active"><a>Statistic</a></li>
+    <li><a [routerLink]="['/']">Back to main page</a></li>
+  </ul>
+</nav>

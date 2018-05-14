@@ -1,0 +1,21 @@
+<header class="admin-header">
+  <span class="open-slide">
+    <button  class="con" id="burg" (click)="openAdminMenu()">
+      <div class="bar top"></div>
+      <div class="bar middle"></div>
+      <div class="bar bottom"></div>
+    </button>
+  </span>
+  <div class="logo" *ngIf="currentUser">Hello <span *ngIf="currentUser && !user">{{currentUser.name}}</span> <span class="header-avatar" *ngIf="currentUser && !user"><ngx-avatar class="my-avatar" [name]="currentUser.name" size="50"></ngx-avatar></span>
+    <span *ngIf="user && currentUser"> <span class="header-avatar"><img src="{{ user.photoUrl }}" style="width: 50px; height: 50px"></span></span><span *ngIf="user && currentUser">{{user.name}}</span>
+  </div>
+</header>
+<nav id="admin-nav">
+  <ul>
+    <li routerLinkActive="active"
+        [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['/user']">My Profile</a></li>
+    <li routerLinkActive="active"><a [routerLink]="['/user/created-files']">My GIFs</a></li>
+    <li routerLinkActive="active"><a>Statistic</a></li>
+    <li><a [routerLink]="['/']">Back to main page</a></li>
+  </ul>
+</nav>

@@ -1,0 +1,36 @@
+.reset-wrap {
+  text-align: center;
+}
+.reset-wrap .h3 {
+  margin-bottom: 40px;
+  text-align: center;
+}
+.reset-wrap .btn {
+  margin: 40px 0;
+  font-weight: 600;
+  text-transform: capitalize;
+  font-size: 15px;
+}
+.reset-wrap .form-group {
+  position: relative;
+}
+.form-group .fa {
+  position: absolute;
+  left: 10px;
+  top: 12px;
+}
+.form-group input {
+  padding-left: 35px;
+}
+.has-error .form-control.underlined {
+  box-shadow:none;
+  border-color:#f44;
+}
+.form-group.has-error .form-help-text {
+  color:#fb494d;
+  font-size:13px;
+}
+.form-group.has-error .form-control {
+  border-color:#fb494d;
+}
+

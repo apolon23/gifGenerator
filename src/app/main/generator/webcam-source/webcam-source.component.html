@@ -1,0 +1,192 @@
+<div  class="container">
+  <div class="example-container">
+    <div class="example-max">
+      <div
+        #example
+        class="exampleGif"
+        [ngStyle]="exampleGif">
+        <div *ngIf="rec" class="rec">REC {{recTimer / 1000 }}</div>
+        <video
+          id="video"
+          class="video"
+          (loadedmetadata)="onMetadata()"
+          #videoElement
+          muted>
+        </video>
+        <div class="example-text" [style.color]="'red'" *ngIf="!initWebCamera">Sorry, camera not connect!</div>
+        <div
+          class="example-text"
+          id="example-text"
+          ngDraggable
+          [bounds]="videoElement"
+          inBounds="true"
+          (endOffset)="onMoveEnd($event)"
+          [ngStyle]="textSize"
+          [style.color]="textColor"
+          [style.font-family]="textFont"
+        >
+          {{optionsForm.value.text}}
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="controls">
+    <button [disabled]="!initWebCamera" (click)="generate(content)" class="btn">Record</button>
+
+  </div>
+
+  <div  [formGroup]="optionsForm">
+    <div>
+      <input type="text"
+             class="text-field"
+             id="tags"
+             formControlName="tags"
+             placeholder="Tags">
+    </div>
+    <div>
+      <label for="time">Time {{this.optionsForm.value.time / 10  + ' sec'}}</label>
+      <input type="range"
+             class=""
+             id="time"
+             formControlName="time"
+             min="10" max="100" value="1" step="1">
+    </div>
+    <div class="">
+      <label for="width">Width</label>
+      <input type="range"
+             class=""
+             id="width"
+             formControlName="width"
+             min="72" max="720" value="360" step="1"
+             (change)="exampleChange()">
+    </div>
+    <div>
+      <input type="text"
+             class="text-field"
+             id="text"
+             formControlName="text"
+             placeholder="Text">
+    </div>
+    <div>
+      <label for="textSize">Text size</label>
+      <input type="range"
+             class=""
+             id="textSize"
+             formControlName="textSize"
+             min="5" max="50" value="5" step="1"
+             (change)="textSizeChange()">
+    </div>
+    <div>
+      <div class="textColor">Text color</div>
+      <input
+        class=""
+        id="textColor"
+        formControlName="textColor"
+        [style.background]="textColor"
+        [colorPicker]="textColor"
+        [cpPosition]="'bottom'"
+        (colorPickerChange)="textColorChange($event)">
+    </div>
+    <div ngbDropdown placement="top-right"  class="">
+      <button class="btn " id="ddfont" ngbDropdownToggle>Select font</button>
+      <div ngbDropdownMenu aria-labelledby="ddfont" id="ddmenu">
+        <button
+          class="dropdown-item"
+          id="serif"
+          (click)="selectFont($event)">
+          serif
+        </button>
+        <button
+          class="dropdown-item"
+          id="sans-serif"
+          (click)="selectFont($event)">
+          sans-serif
+        </button>
+        <button
+          class="dropdown-item"
+          id="system-ui"
+          (click)="selectFont($event)">
+          system-ui
+        </button>
+        <button
+          class="dropdown-item"
+          id="monospace"
+          (click)="selectFont($event)">
+          monospace
+        </button>
+        <button
+          class="dropdown-item"
+          id="cursive"
+          (click)="selectFont($event)">
+          cursive
+        </button>
+        <button
+          class="dropdown-item"
+          id="fantasy"
+          (click)="selectFont($event)">
+          fantasy
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <div class="tags-container" *ngIf="gif">
+        Tags:
+        <div class="tag" *ngFor="let tag of gif.tags">
+          <a [routerLink]="['/']" [queryParams]="{query: tag} " (click)="d('Cross click')">{{tag}}</a>
+        </div>
+      </div>
+      <button type="button"
+              class="close"
+              aria-label="Close"
+              (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="gif-container">
+
+        <div
+          class="result-container"
+          *ngIf="loader"
+          [ngStyle]="exampleGif" >
+          <div>{{progressStatus}}</div>
+          <div class="progressBar">
+            <p><ngb-progressbar
+              type="info"
+
+              [value]="progress"
+              [striped]="true">
+            </ngb-progressbar></p>
+          </div>
+        </div>
+        <div class="gif-block" *ngIf="gif">
+          <img
+            [src]="gif.url"
+            alt="usermedia">
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <a *ngIf="gif" class="btn btn-outline-dark" [href]="gif.url" download>Download</a>
+
+      <button
+        type="button"
+        class="btn btn-outline-dark"
+        (click)="addGif()"
+        *ngIf="currentUser"
+      >
+        Add to dashboard
+      </button>
+      <button
+        type="button"
+        class="btn btn-outline-dark"
+        (click)="c('Close click')">Close</button>
+    </div>
+  </ng-template>
+
+</div>

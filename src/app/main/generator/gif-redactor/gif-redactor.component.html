@@ -1,0 +1,223 @@
+<!--REDACTOR-->
+
+<div class="setting-form" [formGroup]="optionsForm">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6 col-12">
+        <div class="general-settings"
+             placement="top"
+             ngbTooltip="Customize your gif! Change speed and size. ">
+          <h5>General settings</h5>
+          <div class="text-field">
+            <input type="text"
+                   class=""
+                   id="tags"
+                   placeholder="Enter tags"
+                   formControlName="tags"
+            >
+          </div>
+          <div>
+            <label for="speed">speed</label>
+            <input type="range"
+                   class=""
+                   id="speed"
+                   formControlName="speed"
+                   min="1" max="10" value="1" step="1"
+            >
+          </div>
+          <div>
+            <label for="width">width</label>
+            <input type="range"
+                   class=""
+                   id="width"
+                   formControlName="width"
+                   min="72" max="720" value="360" step="1"
+                   (change)="exampleChange()">
+          </div>
+          <div>
+            <label for="height">height</label>
+            <input type="range"
+                   class=""
+                   id="height"
+                   formControlName="height"
+                   min="41" max="410" value="205" step="1"
+                   (change)="exampleChange()">
+          </div>
+
+        </div>
+      </div>
+      <div class="col-lg-6 col-12">
+        <div class="text-settings"
+             placement="top"
+             ngbTooltip="If you want, add text and customize it!">
+          <h5>Text settings</h5>
+          <div class="text-field">
+            <input type="text"
+                   placeholder="Enter text"
+                   class=""
+                   id="text"
+                   formControlName="text" >
+          </div>
+          <div>
+            <label for="textSize">text size</label>
+            <input type="range"
+                   class=""
+                   id="textSize"
+                   formControlName="textSize"
+                   min="5" max="50" value="5" step="1"
+                   (change)="textSizeChange()">
+          </div>
+          <div class="form-control">
+            <div>text color</div>
+            <input
+              class=""
+              id="textColor"
+              formControlName="textColor"
+              [style.background]="textColor"
+              [colorPicker]="textColor"
+              (colorPickerChange)="textColorChange($event)"
+              [cpPosition]="'bottom'">
+          </div>
+          <div class="color-button-container">
+            <div ngbDropdown placement="top-right"  class="d-inline-block">
+              <button class="btn btn-outline-primary" id="ddfont" ngbDropdownToggle>Select font</button>
+              <div ngbDropdownMenu aria-labelledby="ddfont" id="ddmenu">
+                <button
+                  class="dropdown-item"
+                  id="serif"
+                  (click)="selectFont($event)">
+                  serif
+                </button>
+                <button
+                  class="dropdown-item"
+                  id="sans-serif"
+                  (click)="selectFont($event)">
+                  sans-serif
+                </button>
+                <button
+                  class="dropdown-item"
+                  id="system-ui"
+                  (click)="selectFont($event)">
+                  system-ui
+                </button>
+                <button
+                  class="dropdown-item"
+                  id="monospace"
+                  (click)="selectFont($event)">
+                  monospace
+                </button>
+                <button
+                  class="dropdown-item"
+                  id="cursive"
+                  (click)="selectFont($event)">
+                  cursive
+                </button>
+                <button
+                  class="dropdown-item"
+                  id="fantasy"
+                  (click)="selectFont($event)">
+                  fantasy
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--EXAMPLE-->
+
+<div class="example-container">
+  <div class="example-max">
+    <div
+      #example
+      class="exampleGif"
+      [ngStyle]="exampleGif">
+      <div
+        class="example-text"
+        id="example-text"
+        ngDraggable
+        [bounds]="example"
+        inBounds="true"
+        (endOffset)="onMoveEnd($event)"
+        [ngStyle]="textSize"
+        [style.color]="textColor"
+        [style.font-family]="textFont"
+      >
+        {{optionsForm.value.text}}
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--RESULT-->
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <div class="tags-container" *ngIf="gif">
+      Tags:
+      <div class="tag" *ngFor="let tag of gif.tags">
+        <a [routerLink]="['/']" [queryParams]="{query: tag} " (click)="d('Cross click')">{{tag}}</a>
+      </div>
+    </div>
+    <button type="button"
+            class="close"
+            aria-label="Close"
+            (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="gif-container">
+
+      <div
+        class="result-container"
+        *ngIf="loader"
+        [ngStyle]="exampleGif" >
+        <div>{{progressStatus}}</div>
+        <div class="progressBar">
+          <p><ngb-progressbar
+            type="info"
+
+            [value]="progress"
+            [striped]="true">
+          </ngb-progressbar></p>
+        </div>
+      </div>
+
+      <div class="gif-block" *ngIf="gif">
+        <img
+          [src]="gif.url"
+          alt="usermedia"
+        >
+
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <a *ngIf="gif" class="btn btn-outline-dark" [href]="gif.url" download>Download</a>
+
+    <button
+      type="submit"
+      class="btn btn-outline-dark"
+     (click)="addGif()"
+      *ngIf="currentUser"
+      >
+      Add to dashboard
+    </button>
+
+    <button
+      type="button"
+      class="btn btn-outline-dark"
+      (click)="c('Close click')">Close</button>
+  </div>
+</ng-template>
+<button
+        id="btn-generate"
+        [disabled]="source.length == 0"
+        class="btn btn-lg btn-outline-primary"
+        (click)="generateGif(content)"
+>Generate</button>
+
+

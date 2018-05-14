@@ -1,0 +1,40 @@
+<span *ngIf="user"></span>
+<div class="flex-card">
+<div class="img-wrap"><img [src]="image.url" /></div>
+<div class="meta">
+
+    <span class="user" *ngIf="currentUser || user" >
+    <ngb-rating max="5"
+                [(rate)]="image.rating"
+                [readonly]="readonly"
+                (rateChange)="rateChange($event)"
+    >
+      <ng-template let-fill="fill" let-index="index">
+      <span class="star" [class.filled]="fill === 100" [class.bad]="index < 2">&#9733;</span>
+    </ng-template>
+    </ngb-rating>
+  </span>
+
+  <span class="rating">Average rating: {{image.averageRating}} ({{image.timesRating}})</span>
+</div>
+  <p class="btn-container">
+    <button class="btn btn-danger" (click)="guessImg()">Guess Image?</button>
+  </p>
+  <ng-container *ngIf="isGuessTrue">
+  <div id="collapseExample" [ngbCollapse]="!isCollapsed">
+      <div class="card-body guess-body">
+        <p class="tried-guess">We tried to guess what is pictured here <br> Hope we got it :)</p>
+          <div *ngFor="let variant of guessArray" class="guess-var">
+            <span class="guess-var"> {{variant}} </span>
+          </div>
+      </div>
+  </div>
+  <p class="guess-paragr">
+    <button type="button" class="btn btn-guess" (click)="isCollapsed = !isCollapsed"
+            [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">
+      Close
+    </button>
+  </p>
+  </ng-container>
+</div>
+

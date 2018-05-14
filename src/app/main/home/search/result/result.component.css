@@ -1,0 +1,12 @@
+.pagination {
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+}
+.item {
+  border-radius: 5px;
+  overflow: hidden;
+}
+.not-found {
+  text-align: center;
+}

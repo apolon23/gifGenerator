@@ -1,0 +1,67 @@
+﻿<div class="search-wrapper">
+  <div class="container">
+      <h1 class="header-title">Start creating your own GIFs</h1>
+      <app-search [query]="query"></app-search>
+  </div>
+</div>
+<div class="container">
+  <div class="row is-flex">
+    <div class="card-group">
+      <div class="col-md-6 col-lg-3">
+        <div class="card-box">
+          <div class="card-img"><img src="../../../assets/images/picture_mini.png" alt="Picture"></div>
+          <div class="card-content">
+            <div class="button-card">Picture to GIF</div>
+            <p class="card-txt">Create GIFs from your pictures</p>
+          </div>
+          <a class="card-link" [routerLink]="['/generator']"></a>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3">
+        <div class="card-box">
+          <div class="card-img"><img src="../../../assets/images/video_mini.png" alt="Video"></div>
+          <div class="card-content">
+            <div class="button-card">Video to GIF</div>
+            <p class="card-txt">Create GIFs from your video</p>
+          </div>
+          <a class="card-link" [routerLink]="['/generator/video']"></a>
+        </div>
+      </div>
+     <div class="col-md-6 col-lg-3">
+       <div class="card-box">
+         <div class="card-img"><img src="../../../assets/images/web_mini.png" alt="Webcam"></div>
+         <div class="card-content">
+           <div class="button-card">Webcam to GIF</div>
+           <p class="card-txt">Use your webcam to create GIFs</p>
+         </div>
+         <a class="card-link" [routerLink]="['/generator/webcam']"></a>
+       </div>
+     </div>
+     <div class="col-md-6 col-lg-3">
+       <div class="card-box">
+         <div class="card-img"><img src="../../../assets/images/upload_mini.png" alt="Upload"></div>
+         <div class="card-content">
+           <div class="button-card">Upload GIF</div>
+           <p class="card-txt">Upload GIFs to your profile and share them</p>
+         </div>
+         <a class="card-link" [routerLink]="['/upload-gif']"></a>
+       </div>
+     </div>
+    </div>
+  </div>
+</div>
+<section class="main-dashboard">
+  <div class="container">
+    <div class="row">
+      <div class="dash-header"><h1>Created GIFs</h1></div>
+      <div class="flex-grid">
+        <app-dashboard [image]="img" *ngFor="let img of images">
+
+        </app-dashboard>
+      </div>
+      <div class="update-btn"><button class="btn btn-next" (click)="loadAllImages()">Next <i class="fa fa-angle-right" aria-hidden="true"></i></button></div>
+    </div>
+  </div>
+</section>
+
+

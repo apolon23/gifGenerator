@@ -1,0 +1,36 @@
+.admin-sidebar {
+  width: 240px;
+  background-color: #06384f;
+  color: #fff;
+  height: 100vh;
+  position: absolute;
+  padding-top: 70px;
+  z-index: 20;
+}
+.main-list {
+  margin: 0;
+  padding: 0;
+  padding-top: 25px;
+}
+.main-list li {
+  list-style-type: none;
+}
+.main-list li a {
+  color: #687384;
+  text-decoration: none;
+  padding: 8px 35px 8px 15px;
+  display: block;
+  font-size: 18px;
+  transition: color .33s ease;
+}
+.main-list > li.active > a {
+  color: #398bf7;
+}
+.main-list li a:hover {
+  color: #398bf7;
+}
+@media (max-width: 769px) {
+  .admin-sidebar {
+    display: none;
+  }
+}

@@ -1,0 +1,234 @@
+<!--INPUT-->
+
+<div class="container">
+  <div  class="form-container">
+    <input class="inputfile"
+           type = "file"
+           name = "file"
+           id="file"
+           accept="video/*"
+           (change)="handleFileInput($event.target.files)">
+    <label for="file">Choose a file</label>
+  </div>
+
+<!--EXAMPLE-->
+
+  <div *ngIf="video" class="example-container">
+    <div class="example-max">
+      <div
+        #example
+        class="exampleGif"
+        [ngStyle]="exampleGif">
+        <video
+          id="video"
+          class="video"
+          #videoplayer
+          (loadedmetadata)="onMetadata($event.target, videoplayer)"
+          (timeupdate)="timeupdate($event.target.currentTime)"
+          [src]="video.rawUrl"
+          muted>
+        </video>
+        <div
+          class="example-text"
+          id="example-text"
+          ngDraggable
+          [bounds]="videoplayer"
+          inBounds="true"
+          (endOffset)="onMoveEnd($event)"
+          [ngStyle]="textSize"
+          [style.color]="textColor"
+          [style.font-family]="textFont"
+        >
+          {{optionsForm.value.text}}
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!--SLIDER-->
+
+  <div class="slider" *ngIf="duration" ngbTooltip="Crop yours video">
+
+    <ion-range-slider #sliderElement
+                      type="double"
+                      [min]=0
+                      [max]="duration"
+                      [from]=0
+                      [to]="duration"
+                      [min_interval]=1
+                      (onChange)="crop($event)"
+                      [postfix]="' second'"
+    ></ion-range-slider>
+  </div>
+
+<!--SETTINGS-->
+
+  <div *ngIf="duration"  class="controls">
+    <div class="btn-group btn-group-toggle">
+      <button class="btn btn-primary" (click)="play()">Play</button>
+      <button class="btn btn-primary" (click)="pause()">Pause</button>
+      <button class="btn btn-primary"
+              (click)="isCollapsed = !isCollapsed"
+              [attr.aria-expanded]="!isCollapsed"
+              aria-controls="settings">Setting</button>
+      <button class="btn btn-primary"
+              (click)="generate(content)"
+              [disabled]="!video">Generate</button>
+    </div>
+  </div>
+
+  <div id="settings" [ngbCollapse]="isCollapsed">
+        <div  [formGroup]="optionsForm">
+          <div>
+            <input type="text"
+                   class="text-field"
+                   id="tags"
+                   formControlName="tags"
+                   placeholder="Tags">
+          </div>
+          <div>
+            <label for="speed">Speed</label>
+            <input type="range"
+                   class=""
+                   id="speed"
+                   formControlName="speed"
+                   min="0.1" max="3" value="0.1" step="0.1">
+          </div>
+          <div>
+            <label for="width">Width</label>
+            <input type="range"
+                   class=""
+                   id="width"
+                   formControlName="width"
+                   min="72" max="720" value="360" step="1"
+                   (change)="exampleChange()">
+          </div>
+          <div >
+            <input type="text"
+                   class="text-field"
+                   id="text"
+                   formControlName="text"
+                   placeholder="Text"
+                   (change)="textChange()">
+          </div>
+          <div >
+            <label for="textSize">Text size</label>
+            <input type="range"
+                   class=""
+                   id="textSize"
+                   formControlName="textSize"
+                   min="5" max="50" value="5" step="1"
+                   (change)="textSizeChange()">
+          </div>
+          <div >
+            <div class="textColor">Text color</div>
+            <input
+              class=""
+              id="textColor"
+              formControlName="textColor"
+              [style.background]="textColor"
+              [colorPicker]="textColor"
+              [cpPosition]="'bottom'"
+              (colorPickerChange)="textColorChange($event)">
+          </div>
+          <div ngbDropdown placement="top-right"  class="">
+            <button class="btn " id="ddfont" ngbDropdownToggle>Select font</button>
+            <div ngbDropdownMenu aria-labelledby="ddfont" id="ddmenu">
+              <button
+                class="dropdown-item"
+                id="serif"
+                (click)="selectFont($event)">
+                serif
+              </button>
+              <button
+                class="dropdown-item"
+                id="sans-serif"
+                (click)="selectFont($event)">
+                sans-serif
+              </button>
+              <button
+                class="dropdown-item"
+                id="system-ui"
+                (click)="selectFont($event)">
+                system-ui
+              </button>
+              <button
+                class="dropdown-item"
+                id="monospace"
+                (click)="selectFont($event)">
+                monospace
+              </button>
+              <button
+                class="dropdown-item"
+                id="cursive"
+                (click)="selectFont($event)">
+                cursive
+              </button>
+              <button
+                class="dropdown-item"
+                id="fantasy"
+                (click)="selectFont($event)">
+                fantasy
+              </button>
+            </div>
+          </div>
+        </div>
+  </div>
+
+  <ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <div class="tags-container" *ngIf="gif">
+        Tags:
+        <div class="tag" *ngFor="let tag of gif.tags">
+          <a [routerLink]="['/']" [queryParams]="{query: tag} " (click)="d('Cross click')">{{tag}}</a>
+        </div>
+      </div>
+      <button type="button"
+              class="close"
+              aria-label="Close"
+              (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="gif-container">
+
+        <div
+          class="result-container"
+          *ngIf="loader"
+          [ngStyle]="exampleGif" >
+          <div>{{progressStatus}}</div>
+          <div class="progressBar">
+            <p><ngb-progressbar
+              type="info"
+              [value]="progress"
+              [striped]="true">
+            </ngb-progressbar></p>
+          </div>
+        </div>
+        <div class="gif-block" *ngIf="gif">
+          <img
+            [src]="gif.url"
+            alt="usermedia">
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <a *ngIf="gif" class="btn btn-outline-dark" [href]="gif.url" download>Download</a>
+
+      <button
+        type="button"
+        class="btn btn-outline-dark"
+        (click)="addGif()"
+        *ngIf="currentUser"
+      >
+        Add to dashboard
+      </button>
+      <button
+        type="button"
+        class="btn btn-outline-dark"
+        (click)="c('Close click')">Close</button>
+    </div>
+  </ng-template>
+
+</div>
