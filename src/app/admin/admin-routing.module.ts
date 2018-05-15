@@ -7,7 +7,7 @@ import {ManagePageComponent} from './manage-page/manage-page.component';
 
 
 const routes: Routes = [
-  {path: '', component: AdminComponent, canActivate: [AdminAuthGuard], data: {expectedRole: 'true'},   children: [
+  {path: 'admin', component: AdminComponent, canActivate: [AdminAuthGuard], data: {expectedRole: 'true'},   children: [
     {path: '', component: ManageUsersComponent},
     {path: 'manage-page', component: ManagePageComponent},
   ]}

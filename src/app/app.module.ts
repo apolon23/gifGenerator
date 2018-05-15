@@ -19,6 +19,7 @@ import {MessagesService} from './shared/services/messages.service';
 import {GifUploadService} from './shared/services/gif-upload.service';
 import { SocialLoginModule, AuthServiceConfig } from 'angularx-social-login';
 import { GoogleLoginProvider, FacebookLoginProvider} from 'angularx-social-login';
+import {AdminModule} from './admin/admin.module';
 
 let config = new AuthServiceConfig([
   {
@@ -46,6 +47,7 @@ export function provideConfig() {
     ReactiveFormsModule,
     HttpClientModule,
     HttpModule,
+    AdminModule,
     MainModule,
     AppRoutingModule,
     NgbModule.forRoot(),

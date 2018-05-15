@@ -36,10 +36,9 @@ export class LoginComponent implements OnInit {
     this.authService.authState.subscribe((user) => {
       this.user = user;
       this.userService.postSocialUser(user).subscribe(data => {
-        localStorage.setItem('currentUser', JSON.stringify(data));
+        this.router.navigate(['/']);
       });
     });
-        this.router.navigate(['/']);
   }
 
   signInWithFB(): void {
@@ -47,12 +46,10 @@ export class LoginComponent implements OnInit {
     this.authService.authState.subscribe((user) => {
       this.user = user;
       this.userService.postSocialUser(user).subscribe(data => {
-        localStorage.setItem('currentUser', JSON.stringify(data));
+        this.router.navigate(['/']);
       });
     });
-    this.router.navigate(['/']);
   }
-
 
   login() {
     this.authenticationService.login(this.form.value.email, this.form.value.password)

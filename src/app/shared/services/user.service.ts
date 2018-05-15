@@ -15,6 +15,7 @@ const httpOptions = {
 
 @Injectable()
 export class UserService {
+  private token: string;
   constructor(private messagesService: MessagesService,
               private http: HttpClient) { }
 
@@ -77,7 +78,13 @@ export class UserService {
       catchError(this.handleError<any>(`updateUser`))
     );
   }
-  postSocialUser(user: any): Observable<any> {
-    return this.http.post<any>(appConfig.apiUrl + '/usersSocial', user, httpOptions);
+  postSocialUser(user: any) {
+    return this.http.post<any>(appConfig.apiUrl + '/usersSocial', user, httpOptions)
+      .map(data => {
+        if (data && data.token) {
+          localStorage.setItem('currentUser', JSON.stringify(data));
+        }
+        return data;
+      });
   }
 }

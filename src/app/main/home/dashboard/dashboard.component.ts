@@ -4,7 +4,6 @@ import {GifUploadService} from '../../../shared/services/gif-upload.service';
 import {User} from '../../../shared/models/user.model';
 import {AuthenticationService} from '../../../shared/services/authentication.service';
 import {fadeStateTrigger} from '../../../shared/animations/fade.animation';
-import {AuthService, SocialUser} from 'angularx-social-login';
 
 @Component({
   selector: 'app-dashboard',
@@ -17,20 +16,15 @@ export class DashboardComponent implements OnInit {
   @Input() image: Images;
   readonly: boolean;
   currentUser: User;
-  user: SocialUser;
   guessArray: any[];
   isGuessTrue = false;
   public isCollapsed = true;
 
   constructor(private authenticationService: AuthenticationService,
-              private authService: AuthService,
               private imageService: GifUploadService) { }
 
   ngOnInit() {
     this.currentUser = this.authenticationService.getUserDetails();
-    this.authService.authState.subscribe((user) => {
-      this.user = user;
-    });
     this.readFunc();
   }
   readFunc() {
