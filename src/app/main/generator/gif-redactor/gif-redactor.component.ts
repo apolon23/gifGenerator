@@ -4,12 +4,13 @@ import {GeneratorService} from '../../../shared/services/generator.service';
 import { Img } from '../../../shared/models/image.model';
 import { Gif } from '../../../shared/models/gif.model';
 import { Options } from '../../../shared/models/images-options.model';
-import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import {NgbModal, ModalDismissReasons, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 import {GifUploadService} from '../../../shared/services/gif-upload.service';
 import {AuthenticationService} from '../../../shared/services/authentication.service';
 import {User} from '../../../shared/models/user.model';
 import {ImageSourceComponent} from '../image-source/image-source.component';
 import {DomSanitizer} from '@angular/platform-browser';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-gif-redactor',
@@ -34,9 +35,10 @@ export class GifRedactorComponent implements OnInit {
   progressStatus = 'Start working...';
   progressCallback: any;
   currentUser: User;
-
+  modalReference: NgbModalRef;
   constructor(private generatorService: GeneratorService,
               private modalService: NgbModal,
+              private router: Router,
               private fileUploadService: GifUploadService,
               private authenticationService: AuthenticationService) {
     this.optionsForm = new FormGroup({
@@ -101,10 +103,14 @@ export class GifRedactorComponent implements OnInit {
     }
   }
 
-
+  JoinAndClose() {
+    this.router.navigate(['/']);
+    this.modalReference.close();
+  }
   generateGif(content) {
 
-    this.modalService.open(content, { centered: true } ).result.then((result) => {
+    this.modalReference =  this.modalService.open(content, { centered: true } );
+    this.modalReference.result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
       this.gif = undefined;
     }, (reason) => {
@@ -157,6 +163,7 @@ export class GifRedactorComponent implements OnInit {
 
       this.fileUploadService.postGif(file, this.currentUser._id).subscribe(event => {
         console.log(event);
+        this.JoinAndClose();
       }, error => {
         console.log(error);
       });

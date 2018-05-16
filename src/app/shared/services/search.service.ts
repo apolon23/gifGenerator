@@ -4,7 +4,8 @@ import { Injectable } from '@angular/core';
 @Injectable()
 
 export class SearchService {
-  apiKey: String = 'ZoEUancWddiFIFeCoEozwcdJwIRQpP3L';
+  // apiKey: String = 'ZoEUancWddiFIFeCoEozwcdJwIRQpP3L';
+  apiKey: String = 'QDlsOFceRXqomFYefGwfga3yD63xnMUt';
 
   constructor(private http: Http) {}
 

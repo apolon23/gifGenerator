@@ -5,10 +5,11 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { Gif } from '../../../shared/models/gif.model';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Options } from '../../../shared/models/video-options.model';
-import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {ModalDismissReasons, NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 import {User} from '../../../shared/models/user.model';
 import {GifUploadService} from '../../../shared/services/gif-upload.service';
 import {AuthenticationService} from '../../../shared/services/authentication.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-video-source',
@@ -41,11 +42,12 @@ export class VideoSourceComponent implements OnInit {
   progressStatus = 'Start working...';
   progressCallback: any;
   currentUser: User;
-
+  modalReference: NgbModalRef;
   constructor(private generatorService: GeneratorService,
               private sanitizer: DomSanitizer,
               private modalService: NgbModal,
               private fileUploadService: GifUploadService,
+              private router: Router,
               private authenticationService: AuthenticationService) {
     this.optionsForm = new FormGroup({
       tags: new FormControl(),
@@ -156,16 +158,21 @@ export class VideoSourceComponent implements OnInit {
 
       this.fileUploadService.postGif(file, this.currentUser._id).subscribe(event => {
         console.log(event);
+        this.JoinAndClose();
       }, error => {
         console.log(error);
       });
     });
   }
-
+  JoinAndClose() {
+    this.router.navigate(['/']);
+    this.modalReference.close();
+  }
 
   generate(content) {
 
-    this.modalService.open(content, { centered: true }).result.then((result) => {
+    this.modalReference = this.modalService.open(content, { centered: true });
+    this.modalReference.result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
       this.gif = undefined;
     }, (reason) => {

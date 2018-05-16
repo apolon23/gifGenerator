@@ -31,7 +31,7 @@
                 </button>
               </div>
             </li>
-            <li routerLinkActive="active"><a>Popular GIFs</a></li>
+            <li routerLinkActive="active"><a placement="bottom" ngbTooltip="We almost finished. Stay tuned">Popular GIFs</a></li>
           </ul>
         </nav>
 
@@ -130,7 +130,7 @@
         </button>
       </div>
     </li>
-    <li routerLinkActive="active"><a>Popular GIFs</a></li>
+    <li routerLinkActive="active"><a placement="bottom" ngbTooltip="We almost finished. Stay tuned">Popular GIFs</a></li>
   </ul>
 </div>
 <div class="home-content">
@@ -141,6 +141,9 @@
     <div class="row">
       <div class="col-sm-4 col-12">
         <p class="copyright">&#169; 2018 <span class="bold-copy">gifGenerator</span></p>
+        <p
+          class="copyright"><i class="fa fa-envelope-o" aria-hidden="true"></i><a href="mailto:gifgenerator@ukr.net">
+          gifgenerator@ukr.net</a></p>
       </div>
       <div class="col-sm-4 col-12">
         <ul>
@@ -154,9 +157,10 @@
       <div class="col-sm-4 col-12">
         <ul class="soc-footer">
           <li class="firstoflist">Follow us:</li>
-          <li><a ><i class="fa fa-twitter-square" aria-hidden="true"></i>Twitter</a></li>
-          <li><a ><i class="fa fa-facebook-square" aria-hidden="true"></i>Facebook</a></li>
-          <li><a ><i class="fa fa-instagram" aria-hidden="true"></i>Instagram</a></li>
+          <li><a ngbTooltip="We will soon be there:)"><i class="fa fa-twitter-square" aria-hidden="true"></i>Twitter
+          </a></li>
+          <li><a ngbTooltip="We will soon be there:)"><i class="fa fa-facebook-square" aria-hidden="true"></i>Facebook</a></li>
+          <li><a ngbTooltip="We will soon be there:)"><i class="fa fa-instagram" aria-hidden="true"></i>Instagram</a></li>
         </ul>
       </div>
     </div>

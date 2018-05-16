@@ -3,10 +3,11 @@ import { FormControl, FormGroup } from '@angular/forms';
 import {GeneratorService} from '../../../shared/services/generator.service';
 import { Gif } from '../../../shared/models/gif.model';
 import { Options } from '../../../shared/models/webcam-options.model';
-import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import {NgbModal, ModalDismissReasons, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 import {GifUploadService} from '../../../shared/services/gif-upload.service';
 import {AuthenticationService} from '../../../shared/services/authentication.service';
 import {User} from '../../../shared/models/user.model';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-webcam-source',
@@ -35,10 +36,12 @@ export class WebcamSourceComponent implements OnInit, OnDestroy {
   progressStatus = 'Start working...';
   progressCallback: any;
   currentUser: User;
+  modalReference: NgbModalRef;
 
   constructor(private generatorService: GeneratorService,
               private modalService: NgbModal,
               private fileUploadService: GifUploadService,
+              private router: Router,
               private authenticationService: AuthenticationService) {
     this.optionsForm = new FormGroup({
       tags: new FormControl(),
@@ -63,13 +66,16 @@ export class WebcamSourceComponent implements OnInit, OnDestroy {
 
   }
   ngOnDestroy() {
-    this.vidOff();
+      this.vidOff();
   }
 
   vidOff() {
     this.video.pause();
     this.video.src = '';
-    this.stream.getTracks()[0].stop();
+    if (!this.initWebCamera) {
+    } else {
+      this.stream.getTracks()[0].stop();
+    }
   }
   onMetadata() {
     this.textposition();
@@ -89,7 +95,10 @@ export class WebcamSourceComponent implements OnInit, OnDestroy {
     }
   }
 
-
+  JoinAndClose() {
+    this.router.navigate(['/']);
+    this.modalReference.close();
+  }
 
   generate(content) {
     this.rec = true;
@@ -103,7 +112,8 @@ export class WebcamSourceComponent implements OnInit, OnDestroy {
 
     setTimeout(() => {
       this.rec = false;
-      this.modalService.open(content, { centered: true }).result.then((result) => {
+      this.modalReference = this.modalService.open(content, { centered: true });
+      this.modalReference.result.then((result) => {
         this.gif = undefined;
         this.closeResult = `Closed with: ${result}`;
       }, (reason) => {
@@ -217,6 +227,7 @@ export class WebcamSourceComponent implements OnInit, OnDestroy {
 
       this.fileUploadService.postGif(file, this.currentUser._id).subscribe(event => {
         console.log(event);
+        this.JoinAndClose();
       }, error => {
         console.log(error);
       });

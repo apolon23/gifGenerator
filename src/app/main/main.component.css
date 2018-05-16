@@ -142,6 +142,9 @@
 .side-nav ul > li.active > button {
   color: #335384;
 }
+.side-nav ul li a {
+  cursor: pointer;
+}
 .bar {
   display: block;
   height: 5px;
@@ -260,6 +263,14 @@
 }
 .copyright {
   text-align: center;
+}
+.copyright a {
+  color: #ffffff;
+  text-decoration: none;
+}
+.fa-envelope-o {
+  margin-right: 4px;
+  margin-left: 18px;
 }
 .bold-copy {
   font-weight: 600;
